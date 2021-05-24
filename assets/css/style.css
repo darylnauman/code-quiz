@@ -1,4 +1,26 @@
+
+/* --- Element Selectors --- */
+ul, li {
+    list-style-type: none;
+}
+
+/* --- Class Selectors --- */
+
 .option {
-    padding: 20px;
-    border: 2px solid red;
+    background-color: blue;
+    color: white;
+    padding: 5px;
+    border: 1px solid red;
+    border-radius: 10px;
+    margin: 10px;
+    height: 50px;
+    width: 300px;
+}
+
+/* ID Selectors */
+
+/* --- Pseudo-class Selectors ---  */
+
+.option:hover {
+    opacity: 0.4;
 }
