@@ -12,6 +12,11 @@ ul, li {
 
 /* --- Class Selectors --- */
 
+.nav-bar {
+    display:flex;
+    justify-content: space-between;
+}
+
 .option {
     background-color: blue;
     color: white;
@@ -24,12 +29,16 @@ ul, li {
 }
 
 .menu {
-    border: magenta solid 5px;
+    border: black solid 2px;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 /* ID Selectors */
 
-
+#high-scores-div {
+    display: none;
+}
 
 
 /* --- Pseudo-class Selectors ---  */

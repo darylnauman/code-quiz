@@ -3,8 +3,9 @@ var timeLeftEl = document.getElementById("time-left");
 var startButton = document.getElementById("start-button");
 var questionCardEl = document.getElementById("question-card");
 var viewHighScoresEl = document.getElementById("view-high-scores");
-var pageTitleEl = document.getElementById("page-title");
 var highScoresList = document.getElementById("high-scores-list");
+var highScoresDiv = document.getElementById("high-scores-div");
+
 
 var questionEl = document.getElementById("question");
 var optionOneEl = document.getElementById("opt-1");
@@ -36,6 +37,8 @@ function renderQuestionCard () {
 function startTimer() {
     timeLeft = 10;
     startButton.disabled = true;
+    highScoresDiv.setAttribute("style", "display: none");
+
     renderQuestionCard();
     var timeInterval = setInterval(function() {
         timeLeftEl.textContent = timeLeft;
@@ -52,6 +55,7 @@ function startTimer() {
 function displayHighScores (event) {
     
     console.log(`Entered displayHighScores on a ${event.type}`);
+    highScoresDiv.setAttribute("style", "display: block");
     console.log(`highScoresList: ${highScoresList}`);
     // highScoresList = "";
 
