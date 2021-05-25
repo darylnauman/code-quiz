@@ -17,10 +17,10 @@ ul, li {
     justify-content: space-between;
 }
 
-.option {
+.answer {
     background-color: blue;
     color: white;
-    padding: 5px;
+    padding: 10px;
     border: 1px solid red;
     border-radius: 10px;
     margin: 10px;
@@ -28,13 +28,19 @@ ul, li {
     width: 300px;
 }
 
-.menu {
+/* ID Selectors */
+
+#view-high-scores {
     border: black solid 2px;
     border-radius: 5px;
     padding: 5px;
 }
 
-/* ID Selectors */
+#time-countdown {
+    border: black solid 2px;
+    border-radius: 5px;
+    padding: 5px;
+}
 
 #high-scores-div {
     display: none;

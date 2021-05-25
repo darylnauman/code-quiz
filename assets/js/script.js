@@ -6,33 +6,49 @@ var viewHighScoresEl = document.getElementById("view-high-scores");
 var highScoresList = document.getElementById("high-scores-list");
 var highScoresDiv = document.getElementById("high-scores-div");
 
-
 var questionEl = document.getElementById("question");
-var optionOneEl = document.getElementById("opt-1");
-var optionTwoEl = document.getElementById("opt-2");
-var optionThreeEl = document.getElementById("opt-3");
-var optionFourEl = document.getElementById("opt-4");
+var answerA = document.getElementById("answerA");
+var answerB = document.getElementById("answerB");
+var answerC = document.getElementById("answerC");
+var answerD = document.getElementById("answerD");
 
-var highScores = ["Daryl", "32", "Mike", "51"];
+var highScores = [
+    {
+        name: "Daryl",
+        score: "32"
+    }, 
+    {   name: "Mike",
+        score: "51"
+    }
+];
 
 var timeLeft;
+var round = 0;
+var userScore;
+var userName;
 
-var roundOne = {
-   question: "What does CSS stand for?",
-   optionOne: "Christmas Style Santas",
-   optionTwo: "Chrome Super Saver",
-   optionThree: "Cash Savings System",
-   optionFour: "Cascading Style Sheets",
-   correctAnswer: 4
-};
-
-function renderQuestionCard () {
-    questionEl.textContent = roundOne.question;
-    optionOneEl.textContent = roundOne.optionOne;
-    optionTwoEl.textContent = roundOne.optionTwo;
-    optionThreeEl.textContent = roundOne.optionThree;
-    optionFourEl.textContent = roundOne.optionFour;
-}
+var myQuestions = [
+    {
+        question: "What does CSS stand for?",
+        answers: {
+            a: "Christmas Style Santas",
+            b: "Chrome Super Saver",
+            c: "Cash Savings System",
+            d: "Cascading Style Sheets"
+        },
+        correctAnswer: "d"
+    },
+    {
+        question: "What does HTML stand for?",
+        answers: {
+            a: "HyperText Markup Language",
+            b: "HyperTerminal Method Library",
+            c: "Holistic Terminal Machine List",
+            d: "Home Testing Mainenance Local"
+        },
+        correctAnswer: "a"
+    }
+];
 
 function startTimer() {
     timeLeft = 10;
@@ -52,7 +68,36 @@ function startTimer() {
     }, 1000);
 }
 
-function displayHighScores (event) {
+function renderQuestionCard() {
+    
+    questionEl.textContent = myQuestions[round].question;
+    answerA.textContent = myQuestions[round].answers.a;
+    answerB.textContent = myQuestions[round].answers.b;
+    answerC.textContent = myQuestions[round].answers.c;
+    answerD.textContent = myQuestions[round].answers.d;
+    
+    round++;
+
+    return;
+}
+
+function checkAnswer(event) {
+    var element = event.target;
+       
+    if(element.matches(".answer")) {
+        var userSelection = element.getAttribute("data-answer");
+        console.log(`User selection: ${userSelection}`);
+    };
+    
+    // advance to next question if not at end of questions
+    if (round < myQuestions.length) {
+        renderQuestionCard();
+    };
+    
+    return;
+};
+
+function displayHighScores(event) {
     
     console.log(`Entered displayHighScores on a ${event.type}`);
     highScoresDiv.setAttribute("style", "display: block");
@@ -80,22 +125,16 @@ function displayHighScores (event) {
 
         highScoresList.appendChild(li);
     }
-}
+
+    return;
+};
 
 // Event Listeners
-
 
 startButton.addEventListener("click", startTimer);
 
 viewHighScoresEl.addEventListener("click", displayHighScores);
 
-questionCardEl.addEventListener("click", function(event) {
-    var element = event.target;
-   
-    if(element.matches(".option")) {
-        var optionSelected = element.getAttribute("data-option");
-        console.log(`Option selcted: ${optionSelected}`);
-    }
-});
+questionCardEl.addEventListener("click", checkAnswer);
 
 // remember to --> startButton.disabled = false;
