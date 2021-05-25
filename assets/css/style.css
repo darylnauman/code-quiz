@@ -1,8 +1,14 @@
 
 /* --- Element Selectors --- */
+h1 {
+    text-align: center;
+}
+
 ul, li {
     list-style-type: none;
 }
+
+
 
 /* --- Class Selectors --- */
 
@@ -17,7 +23,14 @@ ul, li {
     width: 300px;
 }
 
+.menu {
+    border: magenta solid 5px;
+}
+
 /* ID Selectors */
+
+
+
 
 /* --- Pseudo-class Selectors ---  */
 
