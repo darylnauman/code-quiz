@@ -75,8 +75,6 @@ function renderQuestionCard() {
     answerB.textContent = myQuestions[round].answers.b;
     answerC.textContent = myQuestions[round].answers.c;
     answerD.textContent = myQuestions[round].answers.d;
-    
-    round++;
 
     return;
 }
@@ -87,12 +85,21 @@ function checkAnswer(event) {
     if(element.matches(".answer")) {
         var userSelection = element.getAttribute("data-answer");
         console.log(`User selection: ${userSelection}`);
-    };
+    }
     
+    // display message if correct or wrong, update score or timer
+    if (userSelection === myQuestions[round].correctAnswer) {
+        console.log('Correct Answer!')
+    } else {
+        console.log('Sorry, incorrect answer.');
+    }
+    
+    round++;
+
     // advance to next question if not at end of questions
     if (round < myQuestions.length) {
         renderQuestionCard();
-    };
+    }
     
     return;
 };
