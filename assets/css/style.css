@@ -26,6 +26,10 @@ ul, li {
     width: 300px;
 }
 
+.hidden {
+    display: none;
+}
+
 /* ID Selectors */
 
 #view-high-scores {
@@ -43,7 +47,6 @@ ul, li {
 #high-scores-div {
     display: none;
 }
-
 
 /* --- Pseudo-class Selectors ---  */
 

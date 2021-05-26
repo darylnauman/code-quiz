@@ -5,6 +5,7 @@ var questionCardEl = document.getElementById("question-card");
 var viewHighScoresEl = document.getElementById("view-high-scores");
 var highScoresList = document.getElementById("high-scores-list");
 var highScoresDiv = document.getElementById("high-scores-div");
+var feedbackEl = document.getElementById("feedback");
 
 var questionEl = document.getElementById("question");
 var answerA = document.getElementById("answerA");
@@ -23,7 +24,7 @@ var highScores = [
 ];
 
 var timeLeft;
-var round = 0;
+var round;
 var userScore;
 var userName;
 
@@ -51,10 +52,11 @@ var myQuestions = [
 ];
 
 function startTimer() {
-    timeLeft = 10;
+    round = 0;
+    timeLeft = 59;
     startButton.disabled = true;
     highScoresDiv.setAttribute("style", "display: none");
-
+    
     renderQuestionCard();
     var timeInterval = setInterval(function() {
         timeLeftEl.textContent = timeLeft;
@@ -69,17 +71,20 @@ function startTimer() {
 }
 
 function renderQuestionCard() {
-    
+    questionCardEl.setAttribute("style", "display: block");
+
     questionEl.textContent = myQuestions[round].question;
     answerA.textContent = myQuestions[round].answers.a;
     answerB.textContent = myQuestions[round].answers.b;
     answerC.textContent = myQuestions[round].answers.c;
     answerD.textContent = myQuestions[round].answers.d;
-
+    feedbackEl.textContent = "";
     return;
 }
 
 function checkAnswer(event) {
+    event.preventDefault();
+
     var element = event.target;
        
     if(element.matches(".answer")) {
@@ -89,9 +94,11 @@ function checkAnswer(event) {
     
     // display message if correct or wrong, update score or timer
     if (userSelection === myQuestions[round].correctAnswer) {
-        console.log('Correct Answer!')
+        feedbackEl.textContent = "Correct!"
+
     } else {
-        console.log('Sorry, incorrect answer.');
+        feedbackEl.textContent = "Sorry, incorrect answer."
+        timeLeft = timeLeft - 10;
     }
     
     round++;
