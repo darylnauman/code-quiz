@@ -17,36 +17,38 @@
         </nav>
     </header>
 
-    <div id="game-intro">
-        <p>
-            Welcome to the coding quiz. You will have 60 seconds to complete the quiz. If you answer a question incorrectly your time remaining will be docked 10 seconds. Your time remaining when you answer all questions will be your score. Press the "Start Game" button to begin.
-        </p>
-        <button id="start-button">Start Game</button>
-    </div>   
+    <main>
+        <section id="game-intro">
+            <p>
+                Welcome to the coding quiz. You will have 60 seconds to complete the quiz. If you answer a question incorrectly your time remaining will be docked 10 seconds. Your time remaining when you answer all questions will be your score. Press the "Start Game" button to begin.
+            </p>
+            <button id="start-button">Start Game</button>
+        </section>   
 
-    <div id="question-card" class="hidden">
-        <h2 id="question-header"> <span id="question"></span></h2>
-        <ol>
-            <li class = "answer" data-answer="a"><span id="answerA"></span> </li>
-            <li class = "answer" data-answer="b"><span id="answerB"></span> </li>
-            <li class = "answer" data-answer="c"><span id="answerC"></span> </li>
-            <li class = "answer" data-answer="d"><span id="answerD"></span> </li>
-        </ol>
+        <section id="question-card" class="hidden">
+            <h2 id="question-header"> <span id="question"></span></h2>
+            <ol>
+                <li class = "answer" id="answerA" data-answer="a"></li>
+                <li class = "answer" id="answerB" data-answer="b"></li>
+                <li class = "answer" id="answerC" data-answer="c"></li>
+                <li class = "answer" id="answerD" data-answer="d"></li>
+            </ol>
 
-        <h3 id="feedback"></h3>
+            <h3 id="feedback"></h3>
 
-    </div>
+        </section>
 
-    <div id="high-scores-container">
-        <h1>High Scores</h1>
-        <ul id="high-scores-list"></ul>
-    </div>
+        <section id="high-scores-container">
+            <h1>High Scores</h1>
+            <ul id="high-scores-list"></ul>
+        </section>
 
-    <div id="all-done">
-        <h2>All Done!</h2>
-        <p>Your score was <span id="user-score"></span>.</p>
-    </div>
+        <section id="all-done">
+            <h2>All Done!</h2>
+            <p>Your score was <span id="user-score"></span>.</p>
+        </section>
 
-    <script src="./assets/js/script.js"></script>
+        <script src="./assets/js/script.js"></script>
+    </main>
 </body>
 </html>
