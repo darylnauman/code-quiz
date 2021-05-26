@@ -4,9 +4,10 @@ var startButton = document.getElementById("start-button");
 var questionCardEl = document.getElementById("question-card");
 var viewHighScoresEl = document.getElementById("view-high-scores");
 var highScoresList = document.getElementById("high-scores-list");
-var highScoresDiv = document.getElementById("high-scores-div");
+var highScoresEl = document.getElementById("high-scores-container");
 var feedbackEl = document.getElementById("feedback");
 var gameIntroEl = document.getElementById("game-intro");
+var userScoreEl = document.getElementById("user-score");
 
 var questionEl = document.getElementById("question");
 var answerA = document.getElementById("answerA");
@@ -28,6 +29,7 @@ var timeLeft;
 var round;
 var userScore;
 var userName;
+var isQuizOver = false;
 
 var myQuestions = [
     {
@@ -87,15 +89,18 @@ function startTimer() {
     timeLeft = 60;
 
     startButton.disabled = true;
-    highScoresDiv.setAttribute("style", "display: none");
+    highScoresEl.setAttribute("style", "display: none");
     gameIntroEl.setAttribute("style", "display: none");
     
     renderQuestionCard();
     var timeInterval = setInterval(function() {
         timeLeftEl.textContent = timeLeft;
         
-        if (timeLeft > 0) {
+        if (timeLeft > 0 && isQuizOver === false) {
             timeLeft--;
+        } else if (isQuizOver) {
+            clearInterval(timeInterval);
+            startButton.disabled = false;
         } else {
             clearInterval(timeInterval);
             startButton.disabled = false;
@@ -118,9 +123,9 @@ function renderQuestionCard() {
 }
 
 function checkAnswer(event) {
-    event.preventDefault();
-
+    
     var element = event.target;
+    console.log(element);
        
     if(element.matches(".answer")) {
         var userSelection = element.getAttribute("data-answer");
@@ -141,19 +146,26 @@ function checkAnswer(event) {
     // advance to next question if not at end of questions
     if (round < myQuestions.length) {
         renderQuestionCard();
+    } else {
+        isQuizOver = true;
+        userScore = timeLeft;
+        completeHighScoreBoard();
     }
+
     
     return;
 };
 
+function completeHighScoreBoard() {
+    userScoreEl.textContent = userScore;
+    return;
+}
+
 function displayHighScores(event) {
     
     console.log(`Entered displayHighScores on a ${event.type}`);
-    highScoresDiv.setAttribute("style", "display: block");
-    console.log(`highScoresList: ${highScoresList}`);
-    // highScoresList = "";
-
     questionCardEl.setAttribute("style", "display: none");
+    highScoresEl.setAttribute("style", "display: block");
 
     var storedHighScores = JSON.parse(localStorage.getItem("highScores"));
 
@@ -162,16 +174,13 @@ function displayHighScores(event) {
         highScores = storedHighScores;
     }
 
-    for (var i = 0; i < highScores.length; i = i + 2 ) {
-        var name = highScores[i];
-        var score = highScores[i + 1];
-
-        console.log(`Name: ${name}, Score: ${score}`);
+    for (var i = 0; i < highScores.length; i++) {
+        var name = highScores[i].name;
+        var score = highScores[i].score;
 
         var li = document.createElement("li");
-        li.textContent = `Name: ${name}, Score: ${score}`;
-        console.log(li);
-
+        li.textContent = `${name} - ${score}`;
+        
         highScoresList.appendChild(li);
     }
 

@@ -56,8 +56,9 @@ ul, li {
     padding: 5px;
 }
 
-#high-scores-div {
+#high-scores-container {
     display: none;
+    align-items: center;
 }
 
 /* --- Pseudo-class Selectors ---  */
