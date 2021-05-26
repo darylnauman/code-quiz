@@ -8,6 +8,7 @@ var highScoresEl = document.getElementById("high-scores-container");
 var feedbackEl = document.getElementById("feedback");
 var gameIntroEl = document.getElementById("game-intro");
 var userScoreEl = document.getElementById("user-score");
+var allDoneEl = document.getElementById("all-done");
 
 var questionEl = document.getElementById("question");
 var answerA = document.getElementById("answerA");
@@ -91,8 +92,10 @@ function startTimer() {
     startButton.disabled = true;
     highScoresEl.setAttribute("style", "display: none");
     gameIntroEl.setAttribute("style", "display: none");
-    
+    questionCardEl.setAttribute("style", "display: block");
+
     renderQuestionCard();
+
     var timeInterval = setInterval(function() {
         timeLeftEl.textContent = timeLeft;
         
@@ -100,10 +103,10 @@ function startTimer() {
             timeLeft--;
         } else if (isQuizOver) {
             clearInterval(timeInterval);
-            startButton.disabled = false;
+            completeHighScoreBoard();
         } else {
             clearInterval(timeInterval);
-            startButton.disabled = false;
+            completeHighScoreBoard()
         }
     }, 1000);
 
@@ -111,8 +114,7 @@ function startTimer() {
 }
 
 function renderQuestionCard() {
-    questionCardEl.setAttribute("style", "display: block");
-
+    
     questionEl.textContent = myQuestions[round].question;
     answerA.textContent = myQuestions[round].answers.a;
     answerB.textContent = myQuestions[round].answers.b;
@@ -125,19 +127,18 @@ function renderQuestionCard() {
 function checkAnswer(event) {
     
     var element = event.target;
-    console.log(element);
        
     if(element.matches(".answer")) {
         var userSelection = element.getAttribute("data-answer");
-        console.log(`User selection: ${userSelection}`);
+// console.log(`User selection: ${userSelection}`);
     }
     
     // display message if correct or wrong, update score or timer
     if (userSelection === myQuestions[round].correctAnswer) {
-        feedbackEl.textContent = "Correct!"
+        feedbackEl.textContent = "Your last response was correct!"
 
     } else {
-        feedbackEl.textContent = "Sorry, incorrect answer."
+        feedbackEl.textContent = "Sorry, your last response was incorrect."
         timeLeft = timeLeft - 10;
     }
     
@@ -148,16 +149,21 @@ function checkAnswer(event) {
         renderQuestionCard();
     } else {
         isQuizOver = true;
-        userScore = timeLeft;
+        // userScore = timeLeft;
         completeHighScoreBoard();
     }
-
     
     return;
 };
 
 function completeHighScoreBoard() {
+    questionCardEl.setAttribute("style", "display: none");
+    allDoneEl.setAttribute("style", "display: block");
+    startButton.disabled = false;
+
+    userScore = timeLeft;
     userScoreEl.textContent = userScore;
+
     return;
 }
 

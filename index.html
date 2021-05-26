@@ -13,7 +13,7 @@
         <nav class="nav-bar">
             <h3 id="view-high-scores">View High Scores</h3>
             <h1>Coding Quiz Challenge</h1>
-            <h3 id="time-countdown">Seconds Remaining: <span id="time-left"></span> </h3>
+            <h3 id="time-countdown">Second(s) Remaining: <span id="time-left"></span> </h3>
         </nav>
     </header>
 
@@ -26,6 +26,9 @@
         </section>   
 
         <section id="question-card" class="hidden">
+            
+            <h3 id="feedback"></h3>
+
             <h2 id="question-header"> <span id="question"></span></h2>
             <ol>
                 <li class = "answer" id="answerA" data-answer="a"></li>
@@ -34,8 +37,6 @@
                 <li class = "answer" id="answerD" data-answer="d"></li>
             </ol>
 
-            <h3 id="feedback"></h3>
-
         </section>
 
         <section id="high-scores-container">
@@ -43,7 +44,7 @@
             <ul id="high-scores-list"></ul>
         </section>
 
-        <section id="all-done">
+        <section id="all-done" class="hidden">
             <h2>All Done!</h2>
             <p>Your score was <span id="user-score"></span>.</p>
         </section>
