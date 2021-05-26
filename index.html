@@ -10,15 +10,19 @@
 <body>
     
     <header>
-        <h1>Coding Quiz</h1>
         <nav class="nav-bar">
             <h3 id="view-high-scores">View High Scores</h3>
+            <h1>Coding Quiz Challenge</h1>
             <h3 id="time-countdown">Seconds Remaining: <span id="time-left"></span> </h3>
         </nav>
-        
     </header>
 
-    <button id="start-button">Start Game</button>
+    <div id="game-intro">
+        <p>
+            Welcome to the coding quiz. You will have 60 seconds to complete the quiz. If you answer a question incorrectly your time remaining will be docked 10 seconds. Your time remaining when you answer all questions will be your score. Press the "Start Game" button to begin.
+        </p>
+        <button id="start-button">Start Game</button>
+    </div>   
 
     <div id="question-card" class="hidden">
         <h2 id="question-header"> <span id="question"></span></h2>
@@ -27,11 +31,10 @@
             <li class = "answer" data-answer="b"><span id="answerB"></span> </li>
             <li class = "answer" data-answer="c"><span id="answerC"></span> </li>
             <li class = "answer" data-answer="d"><span id="answerD"></span> </li>
-        </ol>   
-    </div>
+        </ol>
 
-    <div>
         <h3 id="feedback"></h3>
+
     </div>
 
     <div id="high-scores-div">
