@@ -1,7 +1,21 @@
+:root {
+    --color-dark-blue: #012840; 
+    --color-ligher-blue: #03588C;
+    --color-lightest-blue: color: #609BBF;
+}
 
 /* --- Element Selectors --- */
+body {
+    color: var(--color-dark-blue);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 h1 {
     text-align: center;
+}
+
+h3 {
+    font-size: 80%;
 }
 
 ul, li {
@@ -28,12 +42,12 @@ ul, li {
 }
 
 .answer {
-    background-color: blue;
+    background-color: var(--color-ligher-blue);
     color: white;
-    padding: 10px;
-    border: 1px solid red;
+    padding: 20px;
+    border: 1px solid var(--color-dark-blue);
     border-radius: 10px;
-    margin: 10px;
+    margin: 15px;
     height: 50px;
     width: 300px;
 }
@@ -45,13 +59,13 @@ ul, li {
 /* ID Selectors */
 
 #view-high-scores {
-    border: black solid 2px;
+    border: var(--color-dark-blue) solid 2px;
     border-radius: 5px;
     padding: 5px;
 }
 
 #time-countdown {
-    border: black solid 2px;
+    border: var(--color-dark-blue) solid 2px;
     border-radius: 5px;
     padding: 5px;
 }
@@ -63,6 +77,7 @@ ul, li {
 
 /* --- Pseudo-class Selectors ---  */
 
-.option:hover {
-    opacity: 0.4;
+.answer:hover {
+    background-color: white;
+    color: var(--color-dark-blue);
 }
