@@ -9,7 +9,7 @@ The focus of this homework assignment for the University of Toronto SCS Coding B
 - Event listeners are used to start the game, view high scores, select a quiz question answer, and submit initials for the high scores
 - User can view initials of past players and their scores which have been saved in localStorage with the help of JSON to deal with strings and objects
 - Sections are displayed or hidden as needed through use of setAttribute method
-- Questions and answers are rendered based on an array of objects in the main JavaScript file with the HTML file being updated dynamically
+- Questions and answers are rendered based on an array of objects in the main JavaScript file with the HTML being updated dynamically
 - CSS variables are used for colors referenced in the style sheet for ease of future colour scheme updates
 
 ## Link
