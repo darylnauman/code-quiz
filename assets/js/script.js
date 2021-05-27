@@ -1,27 +1,37 @@
+// Variables related to timer
 var timerEl = document.getElementById("time-countdown");
 var timeLeftEl = document.getElementById("time-left");
-var startButton = document.getElementById("start-button");
-var questionCardEl = document.getElementById("question-card");
-var viewHighScoresEl = document.getElementById("view-high-scores");
-var highScoresList = document.getElementById("high-scores-list");
-var highScoresEl = document.getElementById("high-scores-container");
-var feedbackEl = document.getElementById("feedback");
-var gameIntroEl = document.getElementById("game-intro");
-var userScoreEl = document.getElementById("user-score");
-var allDoneEl = document.getElementById("all-done");
-var submitButton = document.getElementById("submit");
 
+// Variables related to game intro and question cards
+var gameIntroEl = document.getElementById("game-intro");
+var questionCardEl = document.getElementById("question-card");
+var feedbackEl = document.getElementById("feedback");
 var questionEl = document.getElementById("question");
 var answerA = document.getElementById("answerA");
 var answerB = document.getElementById("answerB");
 var answerC = document.getElementById("answerC");
 var answerD = document.getElementById("answerD");
 
+// Variables related to viewing the high scores
+var viewHighScoresEl = document.getElementById("view-high-scores");
+var highScoresList = document.getElementById("high-scores-list");
+var highScoresEl = document.getElementById("high-scores-container");
+
+// Variables related to all done section
+var userScoreEl = document.getElementById("user-score");
+var allDoneEl = document.getElementById("all-done");
+
+// Variables related to buttons
+var startButton = document.getElementById("start-button");
+var submitButton = document.getElementById("submit");
+
+// Variables not connected to HTML elements
 var timeLeft;
 var round;
 var userScore;
 var isQuizOver;
 
+// Questions & Answers for quiz
 var myQuestions = [
     {
         question: "What does CSS stand for?",
@@ -75,7 +85,7 @@ var myQuestions = [
     }
 ];
 
-function startTimer() {
+function startGame() {
     isQuizOver = false;
     round = 0;
     timeLeft = 60;
@@ -216,7 +226,7 @@ function displayHighScores(event) {
 
 // Event Listeners
 
-startButton.addEventListener("click", startTimer);
+startButton.addEventListener("click", startGame);
 
 viewHighScoresEl.addEventListener("click", displayHighScores);
 
