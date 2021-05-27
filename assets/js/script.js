@@ -9,6 +9,7 @@ var feedbackEl = document.getElementById("feedback");
 var gameIntroEl = document.getElementById("game-intro");
 var userScoreEl = document.getElementById("user-score");
 var allDoneEl = document.getElementById("all-done");
+var submitButton = document.getElementById("submit");
 
 var questionEl = document.getElementById("question");
 var answerA = document.getElementById("answerA");
@@ -16,20 +17,9 @@ var answerB = document.getElementById("answerB");
 var answerC = document.getElementById("answerC");
 var answerD = document.getElementById("answerD");
 
-var highScores = [
-    {
-        name: "Daryl",
-        score: "32"
-    }, 
-    {   name: "Mike",
-        score: "51"
-    }
-];
-
 var timeLeft;
 var round;
 var userScore;
-var userName;
 var isQuizOver = false;
 
 var myQuestions = [
@@ -103,10 +93,10 @@ function startTimer() {
             timeLeft--;
         } else if (isQuizOver) {
             clearInterval(timeInterval);
-            completeHighScoreBoard();
+            quizOver();
         } else {
             clearInterval(timeInterval);
-            completeHighScoreBoard()
+            quizOver()
         }
     }, 1000);
 
@@ -125,18 +115,16 @@ function renderQuestionCard() {
 }
 
 function checkAnswer(event) {
-    
     var element = event.target;
-       
+    
+    // checks if user clicked a possible answer within question card, if so identify which one
     if(element.matches(".answer")) {
         var userSelection = element.getAttribute("data-answer");
-// console.log(`User selection: ${userSelection}`);
     }
     
-    // display message if correct or wrong, update score or timer
+    // check if user selection was correct, display message & update timer accordingly
     if (userSelection === myQuestions[round].correctAnswer) {
         feedbackEl.textContent = "Your last response was correct!"
-
     } else {
         feedbackEl.textContent = "Sorry, your last response was incorrect."
         timeLeft = timeLeft - 10;
@@ -144,28 +132,58 @@ function checkAnswer(event) {
     
     round++;
 
-    // advance to next question if not at end of questions
+    // check if questions remaining, if so render question card, otherwise quiz over and get info for high score board
     if (round < myQuestions.length) {
         renderQuestionCard();
     } else {
         isQuizOver = true;
-        // userScore = timeLeft;
-        completeHighScoreBoard();
+        quizOver();
     }
     
     return;
 };
 
-function completeHighScoreBoard() {
+function saveUserResults (event) {
+    event.preventDefault();
+    
+    var userName = document.querySelector("#userName").value.trim();
+    
+    var userResults = {
+        name: userName,
+        score: userScore
+    }
+
+    console.log(userResults);
+
+    // Clears user name text input field on page
+    document.querySelector("#userName").value = "";
+
+    // Get stored high scores from localStorage
+    var storedHighScores = JSON.parse(localStorage.getItem("highScores"));
+    var highScores = storedHighScores;
+
+    // checks if localStorage has high scores, if so assigned to local variable
+    if (storedHighScores !== null) {
+        console.log(`storedHighScores was not null and equals: ${storedHighScores}`);
+        // highScores.push(userResults);
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+    } else {
+        console.log("storedHighScores was NULL");
+        localStorage.setItem("highScores", JSON.stringify(userResults));
+    }
+};
+
+function quizOver() {
+     
     questionCardEl.setAttribute("style", "display: none");
     allDoneEl.setAttribute("style", "display: block");
     startButton.disabled = false;
 
     userScore = timeLeft;
-    userScoreEl.textContent = userScore;
+    userScoreEl.textContent = userScore;   
 
     return;
-}
+};
 
 function displayHighScores(event) {
     
@@ -200,3 +218,6 @@ startButton.addEventListener("click", startTimer);
 viewHighScoresEl.addEventListener("click", displayHighScores);
 
 questionCardEl.addEventListener("click", checkAnswer);
+
+submitButton.addEventListener("click", saveUserResults);
+

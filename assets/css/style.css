@@ -61,13 +61,13 @@ ul, li {
 #view-high-scores {
     border: var(--color-dark-blue) solid 2px;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
 }
 
 #time-countdown {
     border: var(--color-dark-blue) solid 2px;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
 }
 
 #high-scores-container {
