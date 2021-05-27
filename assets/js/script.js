@@ -182,9 +182,13 @@ function quizOver() {
 
 function displayHighScores(event) {
     
-    console.log(`Entered displayHighScores on a ${event.type}`);
+    gameIntroEl.setAttribute("style", "display: none");
     questionCardEl.setAttribute("style", "display: none");
+    allDoneEl.setAttribute("style", "display: none");
+
     highScoresEl.setAttribute("style", "display: block");
+
+    startButton.disabled = false;
 
     var storedHighScores = JSON.parse(localStorage.getItem("highScores"));
 
@@ -193,12 +197,16 @@ function displayHighScores(event) {
         highScores = storedHighScores;
     }
 
+    // clears display if previously run
+    highScoresList.innerHTML = '';
+
     for (var i = 0; i < highScores.length; i++) {
-        var name = highScores[i].name;
+        var initials = highScores[i].initials;
         var score = highScores[i].score;
 
         var li = document.createElement("li");
-        li.textContent = `${name} - ${score}`;
+        li.textContent = `${initials} - ${score}`;
+        li.setAttribute("style", "text-align: center");
         
         highScoresList.appendChild(li);
     }
@@ -215,4 +223,3 @@ viewHighScoresEl.addEventListener("click", displayHighScores);
 questionCardEl.addEventListener("click", checkAnswer);
 
 submitButton.addEventListener("click", saveUserResults);
-

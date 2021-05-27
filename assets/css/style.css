@@ -1,7 +1,7 @@
 :root {
     --color-dark-blue: #012840; 
     --color-ligher-blue: #03588C;
-    --color-lightest-blue: color: #609BBF;
+    --color-lightest-blue: #609BBF;
 }
 
 /* --- Element Selectors --- */
@@ -27,18 +27,6 @@ ul, li {
 .nav-bar {
     display:flex;
     justify-content: space-between;
-}
-
-.game-intro {
-    text-align:center;
-    display: block;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.question-card {
-    margin: auto;
 }
 
 .answer {
