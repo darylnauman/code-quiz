@@ -20,7 +20,7 @@ var answerD = document.getElementById("answerD");
 var timeLeft;
 var round;
 var userScore;
-var isQuizOver = false;
+var isQuizOver;
 
 var myQuestions = [
     {
@@ -76,13 +76,17 @@ var myQuestions = [
 ];
 
 function startTimer() {
+    isQuizOver = false;
     round = 0;
     timeLeft = 60;
 
     startButton.disabled = true;
+    submitButton.disabled = false;
     highScoresEl.setAttribute("style", "display: none");
     gameIntroEl.setAttribute("style", "display: none");
     questionCardEl.setAttribute("style", "display: block");
+    allDoneEl.setAttribute("style", "display: none");
+    feedbackEl.textContent = "";
 
     renderQuestionCard();
 
@@ -146,31 +150,22 @@ function checkAnswer(event) {
 function saveUserResults (event) {
     event.preventDefault();
     
-    var userName = document.querySelector("#userName").value.trim();
-    
+    var storedHighScores = JSON.parse(localStorage.getItem("highScores"))||[];
+    var userInitials = document.querySelector("#userInitials").value.trim();
     var userResults = {
-        name: userName,
+        initials: userInitials,
         score: userScore
     }
 
-    console.log(userResults);
+    storedHighScores.push(userResults)
+    localStorage.setItem("highScores", JSON.stringify(storedHighScores));
+    
+    // Clears user initials text input field on page
+    document.querySelector("#userInitials").value = "";
 
-    // Clears user name text input field on page
-    document.querySelector("#userName").value = "";
+    submitButton.disabled = true;
 
-    // Get stored high scores from localStorage
-    var storedHighScores = JSON.parse(localStorage.getItem("highScores"));
-    var highScores = storedHighScores;
-
-    // checks if localStorage has high scores, if so assigned to local variable
-    if (storedHighScores !== null) {
-        console.log(`storedHighScores was not null and equals: ${storedHighScores}`);
-        // highScores.push(userResults);
-        localStorage.setItem("highScores", JSON.stringify(highScores));
-    } else {
-        console.log("storedHighScores was NULL");
-        localStorage.setItem("highScores", JSON.stringify(userResults));
-    }
+    return;
 };
 
 function quizOver() {
